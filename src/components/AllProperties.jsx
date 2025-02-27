@@ -10,19 +10,20 @@ const AllProperties = () => {
       <div className="flex items-center justify-between">
         <div className="flex gap-2 text-xl">
           <div className="flex gap-2">
-            <img src={iconfilter} alt="" /> <span> More Filter</span>
+            <img src={iconfilter} alt="" />{" "}
+            <span className="text-sm md:text-lg"> More Filter</span>
           </div>
-          <p>Showing 1 – 10 of 15 results</p>
+          <p className="text-sm md:text-lg">Showing 1 – 10 of 15 results</p>
         </div>
-        <form className="flex gap-3 items-center ">
+        <form className="flex sm:gap-2 gap-3 items-center ">
           {" "}
           <p
             style={{
-              fontSize: "21px",
               fontWeight: "400",
               color: "#717171",
               marginBottom: "0",
             }}
+            className="text-sm md:text-lg"
           >
             Sort by:
           </p>
@@ -45,9 +46,6 @@ const AllProperties = () => {
           return <PropertyCard key={property._id} {...property} />;
         })}
       </div>
-
-   
-      
     </div>
   );
 };

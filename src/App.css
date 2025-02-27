@@ -1,0 +1,13 @@
+.formbg {
+  background-image: url("./assets/formbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-section {
+  background-image: url("./assets/hero.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

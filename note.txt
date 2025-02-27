@@ -1,0 +1,9 @@
+packages
+tailwind css 
+react-router-dom
+react-icons
+
+pages
+1. login
+2. register
+3. homepage

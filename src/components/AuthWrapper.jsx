@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const AuthWrapper = ({ children }) => {
   return (
-    <div className="flex items-center  min-h-screen w-full">
-      <div className="h-full w-[100%] lg:w-[50%] flex justify-center items-center p-2">
+    <div className="flex items-center  h-screen w-full">
+      <div className="min-h-screen w-[100%] lg:w-[50%] flex justify-center items-center p-2 overflow-y-scroll">
         {children}
       </div>
       <div className="formbg h-screen hidden lg:block lg:w-[50%] pt-7 pl-7">

@@ -18,7 +18,7 @@ const CustomNextArrow = (props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: "27px",
+        borderRadius: "100%",
         position: "absolute",
         top: "50%", // Center vertically
         right: "-18px", // Adjust spacing from right
@@ -65,7 +65,7 @@ const SliderProperty = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-    autoplay: false, // Disable autoplay
+    autoplay: true, // Disable autoplay
     arrows: true,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
@@ -98,7 +98,9 @@ const SliderProperty = () => {
   };
   return (
     <div className="custom-layout">
-      <h1 className="text-center font-semibold text-2xl lg:text-5xl text-[#0f1a1e] my-[55px]">Discover Our Popular Properties</h1>
+      <h1 className="text-center font-semibold text-2xl lg:text-5xl text-[#0f1a1e] my-[55px]">
+        Discover Our Popular Properties
+      </h1>
       <Slider {...settings} className="slider-container">
         {properties.map((property) => {
           return <SliderCard key={property._id} {...property} />;

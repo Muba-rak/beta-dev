@@ -6,7 +6,9 @@ import AuthWrapper from "../components/AuthWrapper";
 import or from "../assets/or.png";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-
+import { toast } from "react-toastify";
+import { useState } from "react";
+// work on remember me
 const Login = () => {
   const {
     register,
@@ -14,21 +16,23 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const url = "http://localhost:3000/api/v1/login";
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     try {
-      // Replace with your actual API endpoint
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/login",
-        data
-      );
+      const response = await axios.post(url, data);
+      console.log(response);
       if (response.status === 200) {
+        toast.success("LOGIN SUCCESSFULLY");
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/");
-        alert("Login successful!");
       }
     } catch (error) {
-      console.error("Login failed:", error);
-      alert("Login failed. Please check your credentials and try again.");
+      console.log(error);
+      toast.error(error?.response?.data?.err, { autoClose: 9000 });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -93,8 +97,12 @@ const Login = () => {
               </div>
               <p className="text-sm text-red-500">Forgot Password</p>
             </div>
-            <button type="submit" className="custom-button">
-              Sign In
+            <button
+              type="submit"
+              className="custom-button"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Signing in...." : "Sign In"}
             </button>
             <img src={or} alt="or" className="block mx-auto my-4" />
             <button className="flex items-center justify-center gap-2 w-full h-[64px] border-2 border-black rounded-2xl text-xl font-normal ">

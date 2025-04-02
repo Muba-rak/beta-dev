@@ -62,7 +62,10 @@ const Footer = () => {
         <hr className="my-[30px]" />
         <div className="flex flex-col lg:flex-row lg:justify-between gap-[25px] custom-layout">
           <div>
-            <p>Copyright 2023 Betahouse | Designed by Michael.fig</p>
+            <p>
+              Copyright {new Date().getFullYear()} Betahouse | Designed by
+              Michael.fig
+            </p>
           </div>
           <div className="w-[187px]">
             <p>Privacy Policy</p>

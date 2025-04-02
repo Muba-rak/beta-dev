@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthWrapper from "../components/AuthWrapper";
 import or from "../assets/or.png";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -15,27 +16,34 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (data) => {
+  const url = "http://localhost:3000/api/v1/register"; //post
+  const myOwnSubmitFunc = async (data) => {
+    setIsSubmitting(true);
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/register",
-        data
-      );
+      const response = await axios.post(url, data);
+      console.log(response);
       if (response.status === 201) {
+        toast.success("ACCOUNT CREATED SUCCESSFULLY");
         navigate("/login");
-        alert("Registration successful!");
       }
     } catch (error) {
-      console.error("Registration failed:", error);
-      alert("Registration failed. Please try again.");
+      console.log(error);
+      toast.error(error?.response?.data?.err);
+      // toast.error(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <>
       <AuthWrapper>
-        <form className="max-w-[486px] py-2" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="max-w-[486px] py-2 relative"
+          onSubmit={handleSubmit(myOwnSubmitFunc)}
+        >
           <h1 className="text-xl font-bold mb-2">
             Join our community of home seekers and explore the possibilities
             that await.
@@ -162,8 +170,12 @@ const Register = () => {
             {errors.agree && (
               <span className="text-red-500 block">{errors.agree.message}</span>
             )}
-            <button type="submit" className="custom-button mt-3.5">
-              Sign Up
+            <button
+              type="submit"
+              className="custom-button mt-3.5"
+              disabled={isSubmitting} // Disable button while submitting
+            >
+              {isSubmitting ? "Signing Up...." : "Sign Up"}
             </button>
             <img src={or} alt="or" className="block mx-auto my-3" />
             <button className="flex items-center justify-center gap-2 w-full h-[64px] border-2 border-black rounded-2xl text-xl font-normal ">

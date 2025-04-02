@@ -8,7 +8,7 @@ const SearchForm = () => {
       <form className="bg-white rounded-[10px] text-black flex flex-col lg:flex-row gap-2.5 lg:gap-0 items-center justify-between  w-[95%] min-h-[86px] p-3 lg:p-0">
         <div className="border-r-2 border-r-gray-300 w-[300px] pl-0 lg:pl-3">
           <label
-            htmlFor="location "
+            htmlFor="location"
             className="block text-[#30343B] font-semibold text-center lg:text-start"
           >
             LOCATION

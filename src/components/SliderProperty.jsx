@@ -96,6 +96,7 @@ const SliderProperty = () => {
       },
     ],
   };
+
   return (
     <div className="custom-layout">
       <h1 className="text-center font-semibold text-2xl lg:text-5xl text-[#0f1a1e] my-[55px]">

@@ -5,7 +5,7 @@ export const properties = [
       "https://plus.unsplash.com/premium_photo-1661915661139-5b6a4e4a6fcc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG91c2V8ZW58MHx8MHx8fDA%3D",
     availability: "sale",
     title: "Luxurious Villa in Beverly Hills",
-    location: "Ikoyi, Lagos",
+    location: "Festac, Lagos",
     bedrooms: 7,
     bathrooms: 7,
     price: 450000000,

@@ -10,6 +10,7 @@ import { LiaBedSolid } from "react-icons/lia";
 import heart from "../assets/heart.png";
 import share from "../assets/share.png";
 import arrow from "../assets/arrow.png";
+import { formatCurrency } from "../utils/formatCurrency";
 const PropertyCard = ({
   _id,
   image,
@@ -59,8 +60,8 @@ const PropertyCard = ({
         <hr className="text-gray-400 my-5" />
         <div className="flex items-center justify-between">
           <h1 className="text-[22px] flex items-center gap-2 text-[#373737] ">
-            <TbCurrencyNaira />
-            {price}
+            {/* <TbCurrencyNaira /> */}
+            {formatCurrency(price)}
           </h1>
           <div className="flex items-center gap-4.5 ">
             <img src={arrow} alt="arrow" />

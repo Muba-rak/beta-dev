@@ -1,30 +1,31 @@
 import React from "react";
-import { properties } from "../data";
+// import { properties } from "../data";
 
 import iconfilter from "../assets/icon.png";
 import PropertyCard from "./PropertyCard";
 
-const AllProperties = () => {
+const AllProperties = ({ properties, totalProperties, resetFilters }) => {
   return (
     <div className="custom-layout mt-5">
       <div className="flex items-center justify-between">
         <div className="flex gap-2 text-xl">
           <div className="flex gap-2">
             <img src={iconfilter} alt="" />{" "}
-            <span className="text-sm md:text-lg"> More Filter</span>
+            <button
+              className="text-sm md:text-lg text-green-600 cursor-pointer"
+              onClick={resetFilters}
+            >
+              {" "}
+              Reset Filters
+            </button>
           </div>
-          <p className="text-sm md:text-lg">Showing 1 – 10 of 15 results</p>
+          <p className="text-sm md:text-lg">
+            Showing 1 – {properties.length} of {totalProperties} results
+          </p>
         </div>
         <form className="flex sm:gap-2 gap-3 items-center ">
           {" "}
-          <p
-            style={{
-              fontWeight: "400",
-              color: "#717171",
-              marginBottom: "0",
-            }}
-            className="text-sm md:text-lg"
-          >
+          <p className="text-sm md:text-lg font-normal text-[#717171] mb-0">
             Sort by:
           </p>
           <select
@@ -34,8 +35,8 @@ const AllProperties = () => {
             className="custom-select"
           >
             <option value=""> Default</option>
-            <option value=""> Default</option>
-            <option value=""> Default</option>
+            <option value=""> Highest To Lowest</option>
+            <option value=""> Lowest To Highest</option>
           </select>
         </form>
       </div>

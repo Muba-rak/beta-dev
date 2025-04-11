@@ -1,7 +1,7 @@
 import React from "react";
 import SearchForm from "./SearchForm";
 
-const HeroContent = () => {
+const HeroContent = ({ setLocation, setPage, setBedroom }) => {
   return (
     <div className="text-white custom-layout flex justify-center items-center">
       <div className="w-full">
@@ -12,7 +12,11 @@ const HeroContent = () => {
           Find your perfect home among our curated properties. Start <br />
           browsing now!
         </p>
-        <SearchForm />
+        <SearchForm
+          setLocation={setLocation}
+          setPage={setPage}
+          setBedroom={setBedroom}
+        />
       </div>
     </div>
   );

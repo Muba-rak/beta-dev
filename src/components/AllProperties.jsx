@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 // import { properties } from "../data";
 
 import iconfilter from "../assets/icon.png";
 import PropertyCard from "./PropertyCard";
 
-const AllProperties = ({ properties, totalProperties, resetFilters }) => {
+const AllProperties = ({
+  properties,
+  totalProperties,
+  resetFilters,
+  setSort,
+  sort,
+}) => {
   return (
     <div className="custom-layout mt-5">
       <div className="flex items-center justify-between">
@@ -24,7 +30,6 @@ const AllProperties = ({ properties, totalProperties, resetFilters }) => {
           </p>
         </div>
         <form className="flex sm:gap-2 gap-3 items-center ">
-          {" "}
           <p className="text-sm md:text-lg font-normal text-[#717171] mb-0">
             Sort by:
           </p>
@@ -33,10 +38,12 @@ const AllProperties = ({ properties, totalProperties, resetFilters }) => {
             id="defaultProperty"
             style={{ border: "none", outline: "none", color: "#717171" }}
             className="custom-select"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
           >
-            <option value=""> Default</option>
-            <option value=""> Highest To Lowest</option>
-            <option value=""> Lowest To Highest</option>
+            <option value="normal"> Default</option>
+            <option value="-price"> Highest To Lowest</option>
+            <option value="price"> Lowest To Highest</option>
           </select>
         </form>
       </div>

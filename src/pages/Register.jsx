@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../utils/axiosConfig";
 
 const Register = () => {
   const {
@@ -18,11 +19,11 @@ const Register = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const url = "http://localhost:3000/api/v1/register"; //post
+  const url = "/register"; //post
   const myOwnSubmitFunc = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post(url, data);
+      const response = await axiosInstance.post(url, data);
       console.log(response);
       if (response.status === 201) {
         toast.success("ACCOUNT CREATED SUCCESSFULLY");

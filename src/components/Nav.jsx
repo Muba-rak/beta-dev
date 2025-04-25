@@ -4,7 +4,7 @@ import person from "../assets/person.png";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useNavigate, Link } from "react-router-dom";
 
-const Nav = () => {
+const Nav = ({ bg = "bg-[#1D293F1F]" }) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const redirect = useNavigate();
@@ -20,10 +20,12 @@ const Nav = () => {
     }
   }, []);
   return (
-    <header className="bg-[#1D293F1F]">
+    <header className={bg}>
       <nav className="h-[121px] text-white custom-layout flex items-center justify-between">
         <div>
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <div className="hidden lg:flex gap-4 text-[20px] font-medium">
           <a href="#">Home</a>

@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthWrapper from "../components/AuthWrapper";
 import or from "../assets/or.png";
@@ -8,24 +7,43 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { axiosInstance } from "../utils/axiosConfig";
 // work on remember me
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const url = "http://localhost:3000/api/v1/login";
+  const [rememberMe, setRememberMe] = useState(false);
+  const url = "/login";
+  useEffect(() => {
+    const savedEmail = localStorage.getItem("email");
+    if (savedEmail) {
+      setValue("email", savedEmail);
+      setRememberMe(true);
+    }
+  }, [setValue]);
+
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await axios.post(url, data);
+      const response = await axiosInstance.post(url, data);
       console.log(response);
       if (response.status === 200) {
         toast.success("LOGIN SUCCESSFULLY");
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        console.log(rememberMe);
+
+        if (rememberMe) {
+          localStorage.setItem("email", response.data.user.email);
+        } else {
+          localStorage.removeItem("email");
+        }
+
         navigate("/");
       }
     } catch (error) {
@@ -91,7 +109,8 @@ const Login = () => {
                   type="checkbox"
                   id="remember"
                   className="h-[20px] w-[20px] rounded-sm bg-green-500"
-                  {...register("remember")}
+                  value={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 <label htmlFor="remember">Remember Me</label>
               </div>

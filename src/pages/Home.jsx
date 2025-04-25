@@ -7,7 +7,8 @@ import SliderProperty from "../components/SliderProperty";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import EmptySearch from "../components/EmptySearch";
-import axios from "axios";
+import { axiosInstance } from "../utils/axiosConfig";
+
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [properties, setProporties] = useState([]);
@@ -16,16 +17,25 @@ const Home = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [numOfProperties, setNumOfProperties] = useState(0);
   const [location, setLocation] = useState("");
+  const [title, setTitle] = useState("");
   const [bedroom, setBedroom] = useState("");
-  const api_url = "http://localhost:3000/api/v1/property";
+  const [sort, setSort] = useState("");
+  const api_url = "/property";
+
   const getProperties = async () => {
     setIsLoading(true);
     try {
-      //fetch the data
-      const { data } = await axios(
-        `${api_url}?page=${page}&location=${location}&bedrooms=${bedroom}`
-      );
-      console.log(data);
+      const params = new URLSearchParams({
+        page: page,
+        ...(location && { location: location.trim() }), //includes values provided
+        ...(bedroom && { bedrooms: bedroom }),
+        ...(title && { title: title }),
+        ...(sort && { sort: sort }),
+      });
+      console.log(params.toString());
+
+      const { data } = await axiosInstance(`${api_url}?${params.toString()}`);
+
       setIsLoading(false);
       setProporties(data.properties);
       setTotalProperties(data.totalProperties);
@@ -38,21 +48,24 @@ const Home = () => {
 
   useEffect(() => {
     getProperties();
-  }, [page, location, bedroom]);
+  }, [page, location, bedroom, title, sort]);
 
   const resetFilters = () => {
     setLocation("");
     setBedroom("");
     setPage(1);
+    setTitle("");
   };
   return (
     <>
       <div className="hero-section w-full min-h-[680px]">
         <Nav />
+
         <HeroContent
           setLocation={setLocation}
           setPage={setPage}
           setBedroom={setBedroom}
+          setTitle={setTitle}
         />
       </div>
       {isLoading ? (
@@ -66,12 +79,16 @@ const Home = () => {
               page={page}
               numOfProperties={numOfProperties}
               resetFilters={resetFilters}
+              setSort={setSort}
+              sort={sort}
             />
             <Pagination page={page} setPage={setPage} totalPages={totalPages} />
           </div>
         )
       )}
-      {properties.length === 0 && <EmptySearch resetFilters={resetFilters} />}
+      {!isLoading && properties.length === 0 && (
+        <EmptySearch resetFilters={resetFilters} />
+      )}
 
       <SliderProperty />
       <Footer />
@@ -81,6 +98,6 @@ const Home = () => {
 
 export default Home;
 
+// proprty title
 //sorting
 //remember me
-// proprty title

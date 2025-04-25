@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useRef } from "react";
-const SearchForm = ({ setLocation, setPage, setBedroom }) => {
+const SearchForm = ({ setLocation, setPage, setBedroom, setTitle }) => {
   const [num, setNum] = useState(0);
   const [loc, setLoc] = useState("");
+  const [ptitle, setPtitle] = useState("");
+
   // const checkNum = (n) => {
   //   if (n <= 0) {
   //     return 0;
@@ -12,12 +14,16 @@ const SearchForm = ({ setLocation, setPage, setBedroom }) => {
   const handleForm = (e) => {
     e.preventDefault();
     setPage(1);
+    console.log({ loc, ptitle, num });
+
     setLocation(loc);
     setBedroom(num);
+    setTitle(ptitle);
 
-    //reset the input
+    // //reset the input
     setLoc("");
     setNum(0);
+    setPtitle("");
   };
 
   return (
@@ -55,6 +61,8 @@ const SearchForm = ({ setLocation, setPage, setBedroom }) => {
             id="text"
             placeholder="e.g Villa, Mansion"
             className="block outline-0 w-full"
+            value={ptitle}
+            onChange={(e) => setPtitle(e.target.value)}
           />
         </div>
 

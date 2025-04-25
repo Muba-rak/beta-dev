@@ -1,9 +1,7 @@
 import React from "react";
-import { TbCurrencyNaira } from "react-icons/tb";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { formatCurrency } from "../utils/formatCurrency";
 const SliderCard = ({
-  _id,
   image,
   title,
   location,
@@ -23,7 +21,6 @@ const SliderCard = ({
         <h2 className="text-[18px] font-semibold "> {title} </h2>
         <p className="text-[20px] font-semibold flex gap-2 items-center">
           {" "}
-          {/* <TbCurrencyNaira /> */}
           {formatCurrency(price)}{" "}
         </p>
         <div className="flex items-center gap-3 text-[14px] my-2.5">

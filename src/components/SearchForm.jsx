@@ -1,16 +1,10 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 const SearchForm = ({ setLocation, setPage, setBedroom, setTitle }) => {
   const [num, setNum] = useState(0);
   const [loc, setLoc] = useState("");
   const [ptitle, setPtitle] = useState("");
 
-  // const checkNum = (n) => {
-  //   if (n <= 0) {
-  //     return 0;
-  //   }
-  //   return n;
-  // };
   const handleForm = (e) => {
     e.preventDefault();
     setPage(1);

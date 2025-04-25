@@ -3,7 +3,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { RiArrowLeftSLine } from "react-icons/ri";
 const Pagination = ({ page, setPage, totalPages }) => {
   const pageNumbers = [];
-  // [1,2, 3] //setage(1) sepPAGE(2)
+
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }

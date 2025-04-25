@@ -1,11 +1,9 @@
 import React from "react";
-
 import chain from "../assets/link.png";
 import camera from "../assets/camera.png";
 import picture from "../assets/photo.png";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdOutlineBathtub } from "react-icons/md";
-import { TbCurrencyNaira } from "react-icons/tb";
 import { LiaBedSolid } from "react-icons/lia";
 import heart from "../assets/heart.png";
 import share from "../assets/share.png";
@@ -20,7 +18,6 @@ const PropertyCard = ({
   location,
   bedrooms,
   bathrooms,
-  squareMeter,
   price,
 }) => {
   return (
